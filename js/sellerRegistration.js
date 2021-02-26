@@ -15,63 +15,70 @@ $(document).ready(function() {
     $(window).resize(toggleNavbarMethod);
 
     // Ajax functionality when user clicks submit for registration (id = rSubmit )
-    $('#rSubmit').click(function(e) {
+    $('#sell-Register').click(function(e) {
         e.preventDefault();
 
         // checking that inputs are not empty and match relevant patterns
-        const IDCheck = regexCheck("#ID", "#invalidinput1", 2);
-        const emailCheck = regexCheck("#email", "#invalidinput2", 1);
-        const passCheck = regexCheck("#password", "#invalidinput3", 3);
-        const rpassCheck = regexCheck("#password", "#invalidinput4", 3);
+        const fNameCheck = checkEmpty("#fname", "#invalidinput1");
+        const lNameCheck = checkEmpty('#lname', '#invalidinput2');
+        const bNameCheck = checkEmpty('#business', '#invalidinput4');
+        const emailCheck = regexCheck("#email", "#invalidinput3", 1);
+        const passCheck = regexCheck("#password", "#invalidinput5", 3);
+        const rpassCheck = regexCheck("#rpassword", "#invalidinput6", 3);
         // checking if password and retyped password match
         const pass = (passCheck == rpassCheck) ? true : false;
 
-        if (emailCheck && IDCheck && passCheck && rpassCheck && pass) {
+        if (emailCheck && fNameCheck && lNameCheck && bNameCheck && passCheck && pass) {
 
-            var ashID = $("#ID").val().trim();
+            var fName = $("#fname").val().trim();
+            var lName = $("#lname").val().trim();
+            var bName = $("#business").val().trim();
             var email = $("#email").val().trim();
             var password = $("#password").val().trim();
-            var submit = $("#rSubmit").val();
+            var submit = $("#sell-Register").val();
 
             // Ajax post function to php controller
-            $.post('controllers/registration.php', {
+            $.post('controllers/sRegistration.php', {
                 submit: submit,
-                ashID: ashID,
+                fName: fName,
+                lName: lName,
+                bName: bName,
                 pwd: password,
                 email: email
             }, function(data) {
+                console.log(data);
                 if (data == 'true') {
                     alert("Succesfully signed up!");
                 }
                 if (data == 'false') {
                     alert("Registration details already exist in database!");
-
                 }
-
-
             });
         }
 
     });
 
     // Ajax functionality when user clicks submit for login (id = lSubmit)
-    $('#lSubmit').click(function(e) {
+    $('#sell-Login').click(function(e) {
         e.preventDefault();
 
         // checking that inputs are not empty and match relevant patterns
-        const emailCheck = regexCheck("#l-email", "#invalidinput5", 1);
-        const passCheck = regexCheck("#l-password", "#invalidinput6", 3);
+        const emailCheck = regexCheck("#s-l-email", "#invalidinput7", 1);
+        const passCheck = regexCheck("#s-l-password", "#invalidinput9", 3);
+        const bNameCheck = checkEmpty('#business-2', '#invalidinput8');
 
         if (emailCheck && passCheck) {
 
-            var email = $("#l-email").val().trim();
-            var password = $("#l-password").val().trim();
-            var submit = $("#lSubmit").val();
+            var email = $("#s-l-email").val().trim();
+            var password = $("#s-l-password").val().trim();
+            var bName = $("#business-2").val().trim();
+            var submit = $("#sell-Login").val();
 
             // Ajax post function to php controller
-            $.post('controllers/login.php', {
+            $.post('controllers/sLogin.php', {
                 submit: submit,
                 pwd: password,
+                bName: bName,
                 email: email
             }, function(data) {
                 console.log(data);
@@ -79,7 +86,7 @@ $(document).ready(function() {
                     window.location.href = "index.html";
                 }
                 if (data == 'false') {
-                    alert("Email or password do not match!");
+                    alert("Email or password do not match!" + data);
 
                 }
 
@@ -123,7 +130,7 @@ function regexCheck(elementID, errorID, type) {
 
     // if type is email
     if (type == 1) {
-        regex = /(^[a-z]+.[a-z]+@ashesi.edu.gh$){1}/;
+        regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
         errorType = 1;
     }
     // if type is ID
@@ -161,7 +168,7 @@ function regexCheck(elementID, errorID, type) {
 /**
  * return:True if not empty, false otherwise
  */
-function checkEmpty(errorID, elementID) {
+function checkEmpty(elementID, errorID) {
 
     var element = $(elementID).val();
     if (element != null) {

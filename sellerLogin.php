@@ -31,7 +31,7 @@
     <script src="lib/slick/slick.min.js"></script>
 
     <!-- Template Javascript with AJAX controller -->
-    <script src="js/registration.js"></script>
+    <script src="js/sellerRegistration.js"></script>
 </head>
 
 <body>
@@ -146,31 +146,37 @@
                     <form class="register-form">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Ashesi ID</label>
-                                <input id="ID" class="form-control userinput" type="text" placeholder="Ashesi ID">
+                                <label>First Name</label>
+                                <input id="fname" class="form-control userinput" type="text" placeholder="First Name">
                                 <div class="errorbox" id="invalidinput1"></div>
-                                <div class="successbox" id="success1"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Last Name</label>
+                                <input id="lname" class="form-control userinput" type="text" placeholder="Last Name">
+                                <div class="errorbox" id="invalidinput2"></div>
                             </div>
                             <div class="col-md-6">
                                 <label>E-mail</label>
                                 <input id="email" class="form-control userinput" type="text" placeholder="E-mail">
-                                <div class="errorbox" id="invalidinput2"></div>
-                                <div class="successbox" id="success2"></div>
+                                <div class="errorbox" id="invalidinput3"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Business Name</label>
+                                <input id="business" class="form-control userinput" type="text" placeholder="Business Name">
+                                <div class="errorbox" id="invalidinput4"></div>
                             </div>
                             <div class="col-md-6">
                                 <label>Password</label>
                                 <input id="password" class="form-control userinput" type="password" placeholder="Password">
-                                <div class="errorbox" id="invalidinput3"></div>
-                                <div class="successbox" id="success3"></div>
+                                <div class="errorbox" id="invalidinput5"></div>
                             </div>
                             <div class="col-md-6">
                                 <label>Retype Password</label>
                                 <input id="rpassword" class="form-control userinput" type="password" placeholder="Password Confirm">
-                                <div class="errorbox" id="invalidinput4"></div>
-                                <div class="successbox" id="success4"></div>
+                                <div class="errorbox" id="invalidinput6"></div>
                             </div>
                             <div class="col-md-12">
-                                <button id="rSubmit" class="btn">Submit</button>
+                                <button id="sell-Register" class="btn">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -181,25 +187,22 @@
                     <form class="login-form">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>E-mail / Username</label>
-                                <input id="l-email" class="form-control userinput" type="text" placeholder="E-mail / Username">
-                                <div class="errorbox" id="invalidinput5"></div>
-                                <div class="successbox" id="success5"></div>
+                                <label>E-mail </label>
+                                <input id="s-l-email" class="form-control userinput" type="text" placeholder="E-mail / Username">
+                                <div class="errorbox" id="invalidinput7"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Business Name</label>
+                                <input id="business-2" class="form-control userinput" type="text" placeholder="Business Name">
+                                <div class="errorbox" id="invalidinput8"></div>
                             </div>
                             <div class="col-md-6">
                                 <label>Password</label>
-                                <input id='l-password' class="form-control userinput" type="password" placeholder="Password">
-                                <div class="errorbox" id="invalidinput6"></div>
-                                <div class="successbox" id="success6"></div>
+                                <input id='s-l-password' class="form-control userinput" type="password" placeholder="Password">
+                                <div class="errorbox" id="invalidinput9"></div>
                             </div>
                             <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Keep me signed in</label>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <button id='lSubmit'class="btn">Submit</button>
+                                <button id='sell-Login'class="btn">Submit</button>
                             </div>
                         </div>
                     </form >
