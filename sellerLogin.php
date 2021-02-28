@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if(isset($_SESSION['sellerID'])){
+    // if session is active already,
+    // access to login/registration page is restricted
+    header('Location: ../seller-product-upload.php'); 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

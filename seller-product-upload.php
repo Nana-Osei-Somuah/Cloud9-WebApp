@@ -1,3 +1,7 @@
+<?php 
+require_once './controllers/sellerSession.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,7 +166,7 @@
                             </div>
                             <div class="col-md-6">
                                 
-                                <input id="product-image" class="" type="file">
+                                <input id="product-image"  type="file">
                                 <div class="errorbox" id="invalidinput4"></div>
                             </div>
                             

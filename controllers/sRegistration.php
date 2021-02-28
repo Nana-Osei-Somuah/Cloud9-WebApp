@@ -1,4 +1,6 @@
-<?php require_once 'dbConnect.php';
+<?php 
+session_start();
+require_once 'dbConnect.php';
 
 
 if(isset($_POST['submit'])){
@@ -18,6 +20,9 @@ if(isset($_POST['submit'])){
     if ($sqlconnection->query($sqlcheck) == TRUE) {
         // close connection
         $sqlconnection->close();
+        // create session for seller
+        $_SESSION['sellerID'] = $sellerID;
+        $_SESSION['sellerStatus'] = 'loggedIN';
         // echo for AJAX
         echo "true";
     }else{

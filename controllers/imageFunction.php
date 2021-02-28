@@ -21,7 +21,7 @@ function uploadImage($file){
     $success = false;
 
     if(in_array($file_A_Ext, $allowed)){
-        $imgName = $name.$file_A_Ext;
+        $imgName = $fileName;
         // file should be less than 5mb
         if($filesize < 5*MB){
             if($fileError === 0){

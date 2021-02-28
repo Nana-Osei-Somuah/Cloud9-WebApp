@@ -26,28 +26,74 @@ $(document).ready(function() {
 
         if (pNameCheck && pCheck && sDescCheck && !imageEmpty) {
 
-            var pName = $("#fname").val().trim();
-            var price = $("#lname").val().trim();
-            var shortDesc = $("#business").val().trim();
-            var image = $("#product-image").val()
+            var pName = $("#pname").val().trim();
+            var price = $("#price").val().trim();
+            var shortDesc = $("#short-desc").val().trim();
+            var image = $("#product-image").prop('files')[0];
             var upload = $("#product-upload").val();
 
-            // Ajax post function to php controller
-            $.post('controllers/productUpload.php', {
-                upload: upload,
-                pName: pName,
-                price: price,
-                shortDesc: shortDesc,
-                image: image
-            }, function(data) {
-                console.log(data);
-                if (data == 'nImage') {
-                    setErrorFor("#invalidinput4", "product-upload", "Image uploaded has to be jpg or png")
-                }
-                if (data == 'false') {
-                    alert("Registration details already exist in database!");
+            var jform = new FormData();
+            jform.append('pName', pName);
+            jform.append('price', price);
+            jform.append('shortDesc', shortDesc);
+            jform.append('upload', upload);
+            jform.append('image', image); // Here's the important bit .get(0).files[0]
+            console.log(image);
+
+            // AJAX functionality to transfer data and file uploaded
+            $.ajax({
+                url: 'controllers/productUpload.php',
+                type: 'POST',
+                data: jform,
+                dataType: 'text',
+                mimeType: 'multipart/form-data', // this too
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data, status, jqXHR) {
+                    if (data == 'empty') {
+                        setErrorFor("#invalidinput4", "product-upload", "Image uploaded has to be jpg or png");
+                    }
+                    if (data == 'true') {
+                        alert("Product uploaded!");
+                    }
+                    if (data == 'false') {
+                        alert("Unable to upload product!");
+                    }
+
+                },
+                error: function(jqXHR, status, error) {
+                    // Hopefully we should never reach here
+                    console.log(jqXHR);
+                    console.log(status);
+                    console.log(error);
                 }
             });
+
+
+
+
+
+
+            // Ajax post function to php controller
+            // $.post('controllers/productUpload.php', {
+            //     upload: upload,
+            //     pName: pName,
+            //     price: price,
+            //     shortDesc: shortDesc,
+            //     image: image
+            // }, function(data) {
+            //     console.log(data);
+            //     if (data == 'empty') {
+            //         setErrorFor("#invalidinput4", "product-upload", "Image uploaded has to be jpg or png")
+            //     }
+            //     if (data == 'true') {
+            //         alert("Product uploaded!");
+            //     }
+            //     if (data == 'false') {
+            //         alert("Unable to upload product!");
+            //     }
+            // });
         }
 
     });
